@@ -1,0 +1,12 @@
+# Protocol file for Keithley DAQ6510 data acquisition and multimeter system
+
+Terminator = LF;
+#ReadTimeout = 200;
+
+get_id {
+   out "*idn?";
+   in "%#s";
+   @init { out "*idn?";
+   	 in "%#s"; }
+}
+

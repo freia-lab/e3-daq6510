@@ -1,0 +1,4 @@
+file "daq6510-gen.template" { pattern
+{}
+{}
+}

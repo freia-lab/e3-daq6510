@@ -25,7 +25,7 @@ EXCLUDE_ARCHS += linux-corei7-poky
 # Since this file (daq6510.Makefile) is copied into
 # the module directory at build-time, these paths have to be relative
 # to that path
-APP := daq6510App
+APP := .
 APPDB := $(APP)/Db
 APPSRC := $(APP)/src
 
@@ -38,7 +38,7 @@ APPSRC := $(APP)/src
 
 TEMPLATES += $(wildcard $(APPDB)/*.db)
 TEMPLATES += $(wildcard $(APPDB)/*.proto)
-TEMPLATES += $(wildcard $(APPDB)/*.template)
+#TEMPLATES += $(wildcard $(APPDB)/*.template)
 
 SCRIPTS += $(wildcard ../iocsh/*.iocsh)
 
@@ -57,6 +57,8 @@ SCRIPTS += $(wildcard ../iocsh/*.iocsh)
 #
 #     SUBS = $(wildcard $(APPDB)/*.substitutions)
 #     TMPS = $(wildcard $(APPDB)/*.template)
+
+SUBS = $(wildcard $(APPDB)/*.substitutions)
 
 USR_DBFLAGS += -I . -I ..
 USR_DBFLAGS += -I $(EPICS_BASE)/db
