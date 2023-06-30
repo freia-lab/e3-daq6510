@@ -1,0 +1,43 @@
+The instrument will be initially used for the temperature control. 
+The main goal of this instrument is to be able to measure the temperature for 
+up to 20 channels with help of RTD (pt100, 4 wires measurment).
+It is important to be sure that the measured temperature is correct - one has
+to handle all possible errors and make them visible in Epics. 
+
+It must be possible to save and restore the settings (*SAV <n>/*RCL <n>)
+
+Required support for:
+ * scans (set-up and use)
+  - it should be possible to initialize the scan with help of Epics PV
+  - show the status of the scan
+
+Optional:
+Support for the configuration lists
+Read (on demand) how many times the contacts has been closed
+
+
+The use case scenario that we want to support  is as follows:
+
+* Reset the instrument to the default state (*RST)
+* Set up the scan for the 4W pt100 measurements of the selected channels
+* Set up the trigger (to start one scan from the SCPI command)
+* Save the settings (*SAV) in the selected location
+* Start the scan - read the data and status of the measurement
+* Repeat the previous action (controlled by the Epics PVs) until decide to stop
+  the measurements.
+
+When in scanning mode the system should automatically return to the last 
+operation mode after power failure of the instrument or rebooting of the IOC.
+It means that the IOC should keep track (autosave) in which mode it is (idle
+or measuring) and return to this mode. The IOC must also save the setting of 
+the DAQ6510 so it will return to the same status in case of power cycling.
+
+I think it can be done in the following way:
+The idle set-up is in SAV0. When the IOC is not measuring this set-up 
+should be started at power-up :system:posetup <name> (ref. manual p. 4-78)
+The measuremnt set-up is SAV1 and if the emasurement is started the command
+":system:posetup sav1" should be sent to the instrument.
+
+There shoud be a PV for this purpose, for example mbbo record.
+The above logic can be implemented in the Epics database usin the seqeunce
+record.
