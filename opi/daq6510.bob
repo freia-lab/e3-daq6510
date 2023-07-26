@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-06-16 17:47:49 by konrad-->
+<!--Saved on 2023-07-26 15:33:51 by nicklas-->
 <display version="2.0.0">
   <name>Display</name>
   <macros>
-    <D>DAQ6510</D>
+    <DEV>DAQ6510</DEV>
     <P>CstatV-AC:</P>
   </macros>
   <widget type="label" version="2.0.0">
@@ -39,7 +39,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update</name>
-    <pv_name>$(P)$(D):Id.$</pv_name>
+    <pv_name>$(P)$(DEV):Id.$</pv_name>
     <x>120</x>
     <y>570</y>
     <width>660</width>
@@ -59,8 +59,8 @@
     </actions>
     <pv_name>ioc25-daq:asynRec</pv_name>
     <text>asynRec</text>
-    <x>680</x>
-    <y>510</y>
+    <x>670</x>
+    <y>180</y>
     <width>97</width>
     <height>40</height>
     <foreground_color>
@@ -71,5 +71,91 @@
       <color red="240" green="240" blue="240">
       </color>
     </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_2</name>
+    <text>Instrument Id:</text>
+    <x>10</x>
+    <y>540</y>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_1</name>
+    <pv_name>$(P)$(DEV):RdTemp.$</pv_name>
+    <x>120</x>
+    <y>540</y>
+    <width>660</width>
+    <format>6</format>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_3</name>
+    <text>Channel 1</text>
+    <x>80</x>
+    <y>80</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_4</name>
+    <text>Channel 3</text>
+    <x>80</x>
+    <y>130</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_5</name>
+    <text>Channel 4</text>
+    <x>80</x>
+    <y>155</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_6</name>
+    <text>Channel 2</text>
+    <x>80</x>
+    <y>105</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_2</name>
+    <pv_name>$(P)$(DEV):Chan1:RdTemp</pv_name>
+    <x>160</x>
+    <y>80</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_3</name>
+    <pv_name>$(P)$(DEV):Chan2:RdTemp</pv_name>
+    <x>160</x>
+    <y>105</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_4</name>
+    <pv_name>$(P)$(DEV):Chan3:RdTemp</pv_name>
+    <x>160</x>
+    <y>130</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_5</name>
+    <pv_name>$(P)$(DEV):Chan4:RdTemp</pv_name>
+    <x>160</x>
+    <y>155</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
   </widget>
 </display>

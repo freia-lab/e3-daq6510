@@ -3,10 +3,32 @@
 Terminator = LF;
 #ReadTimeout = 200;
 
+P = "CstatV-AC:";
+DEV = "DAQ6510";
+
 get_id {
    out "*idn?";
    in "%#s";
    @init { out "*idn?";
    	 in "%#s"; }
+}
+
+set_up_scan {
+   out "*RST";
+   out ":FUNCtion 'TEMPerature',(@101:104)";
+   out ":SENSe:TEMPerature:TRANsducer FRTD, (@101:104)";
+   out ":SENSe:TEMPerature:RTD:FOUR PT100, (@101:104)";
+   out ":ROUTe:SCAN:CREate (@101:104)";
+   out ":ROUTe:SCAN:COUNt:SCAN 1";
+   out ":ROUTe:SCAN:RESTart ON";
+   out "*SAV 1";
+}
+
+read {
+   out ":INIT";
+   out "*WAI";
+   out ":trac:data? 1, 4";
+   #in "%#s";
+   in "%(" $P $DEV ":Chan1:RdTemp)f,%(" $P $DEV ":Chan2:RdTemp)f,%(" $P $DEV ":Chan3:RdTemp)f,%(" $P $DEV ":Chan4:RdTemp)f";
 }
 

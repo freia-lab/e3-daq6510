@@ -5,3 +5,30 @@ record(lsi, "$(P)$(DEV):Id") {
    field (SIZV, "100")
    field (PINI, "YES")
 }
+
+record(bo, "$(P)$(DEV):SetupScan") {
+   field (DESC, "HPM set up scan from scratch")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto set_up_scan $(PORT)")
+   #field (SIZV, "100")
+   #field (PINI, "YES")
+}
+
+record(bo, "$(P)$(DEV):RdTemp") {
+   field (DESC, "HPM read temp")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto read $(PORT)")
+   #field (SIZV, "100")
+   #field (PINI, "YES")
+}
+
+record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
+   field (DESC, "HPM read temp")
+   #field (DTYP, "stream")
+   #field (INP, "@daq6510.proto read $(PORT)")
+   #field (SIZV, "100")
+   #field (PINI, "YES")
+}
+
+
+
