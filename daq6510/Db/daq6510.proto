@@ -15,13 +15,19 @@ get_id {
 
 set_up_scan {
    out "*RST";
-   out ":FUNCtion 'TEMPerature',(@101:104)";
+   out ":FUNCtion 'TEMPerature', (@101:104)";
    out ":SENSe:TEMPerature:TRANsducer FRTD, (@101:104)";
    out ":SENSe:TEMPerature:RTD:FOUR PT100, (@101:104)";
    out ":ROUTe:SCAN:CREate (@101:104)";
    out ":ROUTe:SCAN:COUNt:SCAN 1";
    out ":ROUTe:SCAN:RESTart ON";
    out "*SAV 1";
+}
+
+setting_poweron {
+   out ":syst:pos %s";
+   @init { out ":syst:pos?";
+   	 in "%s"; }
 }
 
 read {

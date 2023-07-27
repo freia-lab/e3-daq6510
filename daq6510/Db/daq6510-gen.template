@@ -1,5 +1,5 @@
 record(lsi, "$(P)$(DEV):Id") {
-   field (DESC, "HPM's id")
+   field (DESC, "id")
    field (DTYP, "stream")
    field (INP, "@daq6510.proto get_id $(PORT)")
    field (SIZV, "100")
@@ -7,7 +7,7 @@ record(lsi, "$(P)$(DEV):Id") {
 }
 
 record(bo, "$(P)$(DEV):SetupScan") {
-   field (DESC, "HPM set up scan from scratch")
+   field (DESC, "set up scan from scratch")
    field (DTYP, "stream")
    field (OUT, "@daq6510.proto set_up_scan $(PORT)")
    #field (SIZV, "100")
@@ -15,20 +15,38 @@ record(bo, "$(P)$(DEV):SetupScan") {
 }
 
 record(bo, "$(P)$(DEV):RdTemp") {
-   field (DESC, "HPM read temp")
+   field (DESC, "read temp")
    field (DTYP, "stream")
    field (OUT, "@daq6510.proto read $(PORT)")
-   #field (SIZV, "100")
-   #field (PINI, "YES")
+   field (SDIS, "$(P)$(DEV):sActive")
+   field (DISV, "0")
+   field (SCAN, "1 second")
 }
 
 record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
-   field (DESC, "HPM read temp")
+   field (DESC, "read temp")
    #field (DTYP, "stream")
    #field (INP, "@daq6510.proto read $(PORT)")
    #field (SIZV, "100")
    #field (PINI, "YES")
 }
+
+
+record(bi, "$(P)$(DEV):sActive") {
+   field (DESC, "idle : 0, measuring : 1")
+   field (ONAM, "RST")
+   field (ZNAM, "SAV1")
+#   field (DTYP, "stream")
+#   field (OUT, "@daq6510.proto setting_poweron $(PORT)")
+   field (PINI, "YES")
+}
+
+#record(bo, "$(P)$(DEV):sPowerOn") {
+#   field (DESC, "Setting at Power On. idle : 0, measuring : 1")
+#   field (ONAM, "Measuring")
+#   field (ZNAM, "Idle")
+#   field (PINI, "YES")
+#}
 
 
 

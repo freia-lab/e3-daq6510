@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-07-26 15:33:51 by nicklas-->
+<!--Saved on 2023-07-27 12:09:38 by nicklas-->
 <display version="2.0.0">
   <name>Display</name>
   <macros>
@@ -157,5 +157,14 @@
     <width>60</width>
     <height>21</height>
     <precision>2</precision>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>Boolean Button</name>
+    <pv_name>$(P)$(DEV):sActive</pv_name>
+    <x>90</x>
+    <y>280</y>
+    <width>120</width>
+    <off_label>Start scan</off_label>
+    <on_label>Stop scan</on_label>
   </widget>
 </display>
