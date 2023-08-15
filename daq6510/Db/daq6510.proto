@@ -3,6 +3,8 @@
 Terminator = LF;
 #ReadTimeout = 200;
 
+ReplyTimeout = 5000;
+
 P = "CstatV-AC:";
 DEV = "DAQ6510";
 
@@ -13,16 +15,16 @@ get_id {
    	 in "%#s"; }
 }
 
-set_up_scan {
-   out "*RST";
-   out ":FUNCtion 'TEMPerature', (@101:104)";
-   out ":SENSe:TEMPerature:TRANsducer FRTD, (@101:104)";
-   out ":SENSe:TEMPerature:RTD:FOUR PT100, (@101:104)";
-   out ":ROUTe:SCAN:CREate (@101:104)";
-   out ":ROUTe:SCAN:COUNt:SCAN 1";
-   out ":ROUTe:SCAN:RESTart ON";
-   out "*SAV 1";
-}
+#set_up_scan {
+#   out "*RST";
+#   out ":FUNCtion 'TEMPerature', (@101:104)";
+#   out ":SENSe:TEMPerature:TRANsducer FRTD, (@101:104)";
+#   out ":SENSe:TEMPerature:RTD:FOUR PT100, (@101:104)";
+#   out ":ROUTe:SCAN:CREate (@101:104)";
+#   out ":ROUTe:SCAN:COUNt:SCAN 1";
+#   out ":ROUTe:SCAN:RESTart ON";
+#   out "*SAV 1";
+#}
 
 setting_poweron {
    out ":syst:pos %s";
@@ -30,11 +32,39 @@ setting_poweron {
    	 in "%s"; }
 }
 
-read {
+reset {
+   out "*RST";
+}
+
+# Sets the scanning type of a channel and adds the channel to the scan
+
+set_up_scan {
+   out ":FUNCtion 'TEMPerature', (@\$1)";
+   out ":SENSe:TEMPerature:TRANsducer FRTD, (@\$1)";
+   out ":SENSe:TEMPerature:RTD:FOUR PT100, (@\$1)";
+   out ":ROUTe:SCAN:ADD (@\$1)";
+}
+
+#Starts the scan (NB only one reading), saves the setting in sav1 and retrieves the size of the current data buffer
+
+start_scan {
+   out ":ROUTe:SCAN:COUNt:SCAN 1";
+   out ":ROUTe:SCAN:RESTart ON";
+   out "*SAV 1";
    out ":INIT";
    out "*WAI";
-   out ":trac:data? 1, 4";
-   #in "%#s";
-   in "%(" $P $DEV ":Chan1:RdTemp)f,%(" $P $DEV ":Chan2:RdTemp)f,%(" $P $DEV ":Chan3:RdTemp)f,%(" $P $DEV ":Chan4:RdTemp)f";
+   out ":trac:act:end?";
+   in "%(" $P $DEV ":lastIndex)i";
+   out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ";
+   in "%(" $P $DEV ":testRead)s"
+}
+
+#retrieves the last buffer reading in the form <Channel>,<Reading>,...
+
+read {
+   out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ";
+#   in "%.1/\$1,([-+]?([0-9]*[.])?[0-9]+([eE][-+]?\d+)?)/";
+#   in "%#/^\$1,|[a-zA-Z0-9,.]*\$1,//%f%*#s"
+    in "%#/.*\$1,//%f%*#s"
 }
 

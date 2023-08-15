@@ -6,47 +6,78 @@ record(lsi, "$(P)$(DEV):Id") {
    field (PINI, "YES")
 }
 
-record(bo, "$(P)$(DEV):SetupScan") {
-   field (DESC, "set up scan from scratch")
+record(lsi, "$(P)$(DEV):testRead") {
+   field (DESC, "test read")
+   field (SIZV, "100")
+#   field (PINI, "YES")
+}
+
+record(bo, "$(P)$(DEV):Reset") {
+   field (DESC, "Reset device")
    field (DTYP, "stream")
-   field (OUT, "@daq6510.proto set_up_scan $(PORT)")
-   #field (SIZV, "100")
-   #field (PINI, "YES")
+   field (OUT, "@daq6510.proto reset $(PORT)")
+   field (FLNK, "$(P)$(DEV):FanoutSetup")
 }
 
-record(bo, "$(P)$(DEV):RdTemp") {
-   field (DESC, "read temp")
-   field (DTYP, "stream")
-   field (OUT, "@daq6510.proto read $(PORT)")
-   field (SDIS, "$(P)$(DEV):sActive")
-   field (DISV, "0")
-   field (SCAN, "1 second")
+record(ai, "$(P)$(DEV):lastIndex") {
+   field (DESC, "buffer last index")
 }
 
-record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
-   field (DESC, "read temp")
-   #field (DTYP, "stream")
-   #field (INP, "@daq6510.proto read $(PORT)")
-   #field (SIZV, "100")
-   #field (PINI, "YES")
-}
-
-
-record(bi, "$(P)$(DEV):sActive") {
-   field (DESC, "idle : 0, measuring : 1")
-   field (ONAM, "RST")
-   field (ZNAM, "SAV1")
-#   field (DTYP, "stream")
-#   field (OUT, "@daq6510.proto setting_poweron $(PORT)")
+record(mbboDirect, "$(P)$(DEV):ChanActive") {
+   field (DESC, "Activated channels")
    field (PINI, "YES")
 }
 
-#record(bo, "$(P)$(DEV):sPowerOn") {
-#   field (DESC, "Setting at Power On. idle : 0, measuring : 1")
-#   field (ONAM, "Measuring")
-#   field (ZNAM, "Idle")
+record(bo, "$(P)$(DEV):Chan$(CHAN):SetupScan") {
+   field (DESC, "Activate channel 10$(CHAN)")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto set_up_scan(10$(CHAN)) $(PORT)")
+}
+
+record(bo, "$(P)$(DEV):StartScan") {
+   field (DESC, "idle : 0, measuring : 1")
+   field (ONAM, "RST")
+   field (ZNAM, "SAV1")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto start_scan $(PORT)")
 #   field (PINI, "YES")
+#   field (FLNK, "$(P)$(DEV):FanoutRead")
+}
+
+#record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
+#   field (DESC, "read temp")
+#   field (DTYP, "stream")
+#   field (INP, "@daq6510.proto read(10$(CHAN)) $(PORT)")
+#   field (SDIS, "$(P)$(DEV):sActive")
+#   field (DISV, "0")
 #}
 
+record(fanout, "$(P)$(DEV):FanoutSetup") {
+   field (DESC, "Link to read records")
+   field (LNK0, "$(P)$(DEV):Chan1:SetupScan")
+   field (LNK1, "$(P)$(DEV):Chan2:SetupScan")
+   field (LNK2, "$(P)$(DEV):Chan3:SetupScan")
+   field (LNK3, "$(P)$(DEV):Chan4:SetupScan")
+   field (FLNK, "$(P)$(DEV):StartScan")
+   field (SELM, "Mask")
+   field (SHFT, "0")
+   field (SELL, "$(P)$(DEV):ChanActive")
+}
+
+#record(fanout, "$(P)$(DEV):FanoutRead") {
+#   field (DESC, "Link to read records")
+#   field (LNK0, "$(P)$(DEV):Chan1:RdTemp")
+#   field (LNK1, "$(P)$(DEV):Chan2:RdTemp")
+#   field (LNK2, "$(P)$(DEV):Chan3:RdTemp")
+#   field (LNK3, "$(P)$(DEV):Chan4:RdTemp")
+#   field (SELL, "$(P)$(DEV):ChanActive")
+#}
+
+
+#record(ai, "testRead") {
+#   field (DESC, "read temp")
+#   field (DTYP, "stream")
+#   field (INP, "@daq6510.proto read(103) $(PORT)")
+#}
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-07-27 12:09:38 by nicklas-->
+<!--Saved on 2023-08-15 13:53:34 by nicklas-->
 <display version="2.0.0">
   <name>Display</name>
   <macros>
@@ -80,7 +80,7 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_1</name>
-    <pv_name>$(P)$(DEV):RdTemp.$</pv_name>
+    <pv_name>$(P)$(DEV):testRead.$</pv_name>
     <x>120</x>
     <y>540</y>
     <width>660</width>
@@ -160,11 +160,69 @@
   </widget>
   <widget type="bool_button" version="2.0.0">
     <name>Boolean Button</name>
-    <pv_name>$(P)$(DEV):sActive</pv_name>
+    <pv_name>$(P)$(DEV):Reset.PROC</pv_name>
     <x>90</x>
     <y>280</y>
     <width>120</width>
-    <off_label>Start scan</off_label>
-    <on_label>Stop scan</on_label>
+    <off_label>Scan</off_label>
+    <off_color>
+      <color name="BACKGROUND" red="220" green="225" blue="221">
+      </color>
+    </off_color>
+    <on_label>Scan</on_label>
+    <on_color>
+      <color name="BACKGROUND" red="220" green="225" blue="221">
+      </color>
+    </on_color>
+    <show_led>false</show_led>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_1</name>
+    <pv_name>$(P)$(DEV):ChanActive.B0</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>81</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_2</name>
+    <pv_name>$(P)$(DEV):ChanActive.B1</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>107</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_3</name>
+    <pv_name>$(P)$(DEV):ChanActive.B2</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>132</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_4</name>
+    <pv_name>$(P)$(DEV):ChanActive.B3</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>157</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_7</name>
+    <text>Activate</text>
+    <x>220</x>
+    <y>54</y>
+    <width>55</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
   </widget>
 </display>
