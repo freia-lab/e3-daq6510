@@ -6,9 +6,11 @@ record(lsi, "$(P)$(DEV):Id") {
    field (PINI, "YES")
 }
 
-record(lsi, "$(P)$(DEV):testRead") {
+record(ai, "$(P)$(DEV):testRead") {
    field (DESC, "test read")
-   field (SIZV, "100")
+   field (DTYP, "stream")
+   field (INP, "@daq6510.proto read(102) $(PORT)")
+#   field (SIZV, "100")
 #   field (PINI, "YES")
 }
 
@@ -40,17 +42,14 @@ record(bo, "$(P)$(DEV):StartScan") {
    field (ZNAM, "SAV1")
    field (DTYP, "stream")
    field (OUT, "@daq6510.proto start_scan $(PORT)")
-#   field (PINI, "YES")
-#   field (FLNK, "$(P)$(DEV):FanoutRead")
+   field (FLNK, "$(P)$(DEV):FanoutRead")
 }
 
-#record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
-#   field (DESC, "read temp")
-#   field (DTYP, "stream")
-#   field (INP, "@daq6510.proto read(10$(CHAN)) $(PORT)")
-#   field (SDIS, "$(P)$(DEV):sActive")
-#   field (DISV, "0")
-#}
+record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
+   field (DESC, "read temp")
+   field (DTYP, "stream")
+   field (INP, "@daq6510.proto read(10$(CHAN)) $(PORT)")
+}
 
 record(fanout, "$(P)$(DEV):FanoutSetup") {
    field (DESC, "Link to read records")
@@ -64,14 +63,16 @@ record(fanout, "$(P)$(DEV):FanoutSetup") {
    field (SELL, "$(P)$(DEV):ChanActive")
 }
 
-#record(fanout, "$(P)$(DEV):FanoutRead") {
-#   field (DESC, "Link to read records")
-#   field (LNK0, "$(P)$(DEV):Chan1:RdTemp")
-#   field (LNK1, "$(P)$(DEV):Chan2:RdTemp")
-#   field (LNK2, "$(P)$(DEV):Chan3:RdTemp")
-#   field (LNK3, "$(P)$(DEV):Chan4:RdTemp")
-#   field (SELL, "$(P)$(DEV):ChanActive")
-#}
+record(fanout, "$(P)$(DEV):FanoutRead") {
+   field (DESC, "Link to read records")
+   field (LNK0, "$(P)$(DEV):Chan1:RdTemp")
+   field (LNK1, "$(P)$(DEV):Chan2:RdTemp")
+   field (LNK2, "$(P)$(DEV):Chan3:RdTemp")
+   field (LNK3, "$(P)$(DEV):Chan4:RdTemp")
+   field (SELM, "Mask")
+   field (SHFT, "0")
+   field (SELL, "$(P)$(DEV):ChanActive")
+}
 
 
 #record(ai, "testRead") {

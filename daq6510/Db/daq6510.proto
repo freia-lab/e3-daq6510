@@ -55,16 +55,17 @@ start_scan {
    out "*WAI";
    out ":trac:act:end?";
    in "%(" $P $DEV ":lastIndex)i";
-   out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ";
-   in "%(" $P $DEV ":testRead)s"
+   #out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ";
+   #in "%(" $P $DEV ":testRead)s"
 }
 
 #retrieves the last buffer reading in the form <Channel>,<Reading>,...
 
 read {
    out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ";
-#   in "%.1/\$1,([-+]?([0-9]*[.])?[0-9]+([eE][-+]?\d+)?)/";
+#   in "%.1/\$1,([-+]?([0-9]*[.])?[0-9]+([eE][-+]?\d+)?).*/";
 #   in "%#/^\$1,|[a-zA-Z0-9,.]*\$1,//%f%*#s"
-    in "%#/.*\$1,//%f%*#s"
+   in "%#/(^\$1,)|(.*\$1,)//%f%*#s"
+
 }
 
