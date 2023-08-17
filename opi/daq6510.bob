@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-16 10:59:26 by nicklas-->
+<!--Saved on 2023-08-17 14:55:37 by nicklas-->
 <display version="2.0.0">
   <name>Display</name>
   <macros>
@@ -80,10 +80,11 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_1</name>
-    <pv_name>$(P)$(DEV):testRead</pv_name>
+    <pv_name>$(P)$(DEV):SystErr.$</pv_name>
     <x>120</x>
     <y>540</y>
     <width>660</width>
+    <format>6</format>
     <precision>4</precision>
   </widget>
   <widget type="label" version="2.0.0">
@@ -161,8 +162,8 @@
   <widget type="bool_button" version="2.0.0">
     <name>Boolean Button</name>
     <pv_name>$(P)$(DEV):Reset.PROC</pv_name>
-    <x>90</x>
-    <y>280</y>
+    <x>860</x>
+    <y>330</y>
     <width>120</width>
     <off_label>Scan</off_label>
     <off_color>
@@ -181,40 +182,18 @@
     <pv_name>$(P)$(DEV):ChanActive.B0</pv_name>
     <label></label>
     <x>235</x>
-    <y>81</y>
+    <y>82</y>
     <width>18</width>
     <height>18</height>
     <auto_size>true</auto_size>
-  </widget>
-  <widget type="checkbox" version="2.0.0">
-    <name>Check Box_2</name>
-    <pv_name>$(P)$(DEV):ChanActive.B1</pv_name>
-    <label></label>
-    <x>235</x>
-    <y>107</y>
-    <width>18</width>
-    <height>18</height>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="checkbox" version="2.0.0">
-    <name>Check Box_3</name>
-    <pv_name>$(P)$(DEV):ChanActive.B2</pv_name>
-    <label></label>
-    <x>235</x>
-    <y>132</y>
-    <width>18</width>
-    <height>18</height>
-    <auto_size>true</auto_size>
-  </widget>
-  <widget type="checkbox" version="2.0.0">
-    <name>Check Box_4</name>
-    <pv_name>$(P)$(DEV):ChanActive.B3</pv_name>
-    <label></label>
-    <x>235</x>
-    <y>157</y>
-    <width>18</width>
-    <height>18</height>
-    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_7</name>
@@ -224,5 +203,654 @@
     <width>55</width>
     <height>21</height>
     <auto_size>true</auto_size>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>Boolean Button_2</name>
+    <pv_name>$(P)$(DEV):OnOff.A</pv_name>
+    <x>160</x>
+    <y>430</y>
+    <width>130</width>
+    <height>20</height>
+    <off_label>Turn ON</off_label>
+    <on_label>Turn OFF</on_label>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_6</name>
+    <pv_name>$(P)$(DEV):ChanActive.B2</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>130</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_7</name>
+    <pv_name>$(P)$(DEV):ChanActive.B3</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>156</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_8</name>
+    <pv_name>$(P)$(DEV):ChanActive.B1</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>106</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_8</name>
+    <text>Channel 5</text>
+    <x>80</x>
+    <y>180</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_9</name>
+    <text>Channel 7</text>
+    <x>80</x>
+    <y>230</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_10</name>
+    <text>Channel 8</text>
+    <x>80</x>
+    <y>255</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_11</name>
+    <text>Channel 6</text>
+    <x>80</x>
+    <y>205</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_9</name>
+    <pv_name>$(P)$(DEV):Chan1:RdTemp</pv_name>
+    <x>160</x>
+    <y>180</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_10</name>
+    <pv_name>$(P)$(DEV):Chan2:RdTemp</pv_name>
+    <x>160</x>
+    <y>205</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_11</name>
+    <pv_name>$(P)$(DEV):Chan3:RdTemp</pv_name>
+    <x>160</x>
+    <y>230</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_12</name>
+    <pv_name>$(P)$(DEV):Chan4:RdTemp</pv_name>
+    <x>160</x>
+    <y>255</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_9</name>
+    <pv_name>$(P)$(DEV):ChanActive.B0</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>182</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_10</name>
+    <pv_name>$(P)$(DEV):ChanActive.B2</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>230</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_11</name>
+    <pv_name>$(P)$(DEV):ChanActive.B3</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>256</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_12</name>
+    <pv_name>$(P)$(DEV):ChanActive.B1</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>206</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_12</name>
+    <text>Channel 9</text>
+    <x>80</x>
+    <y>280</y>
+    <width>67</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_15</name>
+    <text>Channel 10</text>
+    <x>80</x>
+    <y>305</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_13</name>
+    <pv_name>$(P)$(DEV):Chan1:RdTemp</pv_name>
+    <x>160</x>
+    <y>280</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_14</name>
+    <pv_name>$(P)$(DEV):Chan2:RdTemp</pv_name>
+    <x>160</x>
+    <y>305</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_13</name>
+    <pv_name>$(P)$(DEV):ChanActive.B0</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>282</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_16</name>
+    <pv_name>$(P)$(DEV):ChanActive.B1</pv_name>
+    <label></label>
+    <x>235</x>
+    <y>306</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_16</name>
+    <text>Channel 11</text>
+    <x>301</x>
+    <y>80</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_17</name>
+    <text>Channel 13</text>
+    <x>301</x>
+    <y>130</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_18</name>
+    <text>Channel 14</text>
+    <x>301</x>
+    <y>155</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_19</name>
+    <text>Channel 12</text>
+    <x>301</x>
+    <y>105</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_17</name>
+    <pv_name>$(P)$(DEV):Chan1:RdTemp</pv_name>
+    <x>381</x>
+    <y>80</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_18</name>
+    <pv_name>$(P)$(DEV):Chan2:RdTemp</pv_name>
+    <x>381</x>
+    <y>105</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_19</name>
+    <pv_name>$(P)$(DEV):Chan3:RdTemp</pv_name>
+    <x>381</x>
+    <y>130</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_20</name>
+    <pv_name>$(P)$(DEV):Chan4:RdTemp</pv_name>
+    <x>381</x>
+    <y>155</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_17</name>
+    <pv_name>$(P)$(DEV):ChanActive.B0</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>82</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_20</name>
+    <text>Activate</text>
+    <x>441</x>
+    <y>54</y>
+    <width>55</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_18</name>
+    <pv_name>$(P)$(DEV):ChanActive.B2</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>130</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_19</name>
+    <pv_name>$(P)$(DEV):ChanActive.B3</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>156</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_20</name>
+    <pv_name>$(P)$(DEV):ChanActive.B1</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>106</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_21</name>
+    <text>Channel 15</text>
+    <x>301</x>
+    <y>180</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_22</name>
+    <text>Channel 17</text>
+    <x>301</x>
+    <y>230</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_23</name>
+    <text>Channel 18</text>
+    <x>301</x>
+    <y>255</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_24</name>
+    <text>Channel 16</text>
+    <x>301</x>
+    <y>205</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_21</name>
+    <pv_name>$(P)$(DEV):Chan1:RdTemp</pv_name>
+    <x>381</x>
+    <y>180</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_22</name>
+    <pv_name>$(P)$(DEV):Chan2:RdTemp</pv_name>
+    <x>381</x>
+    <y>205</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_23</name>
+    <pv_name>$(P)$(DEV):Chan3:RdTemp</pv_name>
+    <x>381</x>
+    <y>230</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_24</name>
+    <pv_name>$(P)$(DEV):Chan4:RdTemp</pv_name>
+    <x>381</x>
+    <y>255</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_21</name>
+    <pv_name>$(P)$(DEV):ChanActive.B0</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>182</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_22</name>
+    <pv_name>$(P)$(DEV):ChanActive.B2</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>230</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_23</name>
+    <pv_name>$(P)$(DEV):ChanActive.B3</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>256</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_24</name>
+    <pv_name>$(P)$(DEV):ChanActive.B1</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>206</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_25</name>
+    <text>Channel 19</text>
+    <x>301</x>
+    <y>280</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label_26</name>
+    <text>Channel 20</text>
+    <x>301</x>
+    <y>305</y>
+    <width>75</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_25</name>
+    <pv_name>$(P)$(DEV):Chan1:RdTemp</pv_name>
+    <x>381</x>
+    <y>280</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_26</name>
+    <pv_name>$(P)$(DEV):Chan2:RdTemp</pv_name>
+    <x>381</x>
+    <y>305</y>
+    <width>60</width>
+    <height>21</height>
+    <precision>2</precision>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_25</name>
+    <pv_name>$(P)$(DEV):ChanActive.B0</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>282</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
+  </widget>
+  <widget type="checkbox" version="2.0.0">
+    <name>Check Box_26</name>
+    <pv_name>$(P)$(DEV):ChanActive.B1</pv_name>
+    <label></label>
+    <x>456</x>
+    <y>306</y>
+    <width>18</width>
+    <height>18</height>
+    <auto_size>true</auto_size>
+    <rules>
+      <rule name="New Rule" prop_id="enabled" out_exp="false">
+        <exp bool_exp="pv0==1">
+          <value>false</value>
+        </exp>
+        <pv_name>$(P)$(DEV):OnOff</pv_name>
+      </rule>
+    </rules>
   </widget>
 </display>

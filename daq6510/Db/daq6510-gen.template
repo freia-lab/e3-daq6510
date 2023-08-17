@@ -6,19 +6,54 @@ record(lsi, "$(P)$(DEV):Id") {
    field (PINI, "YES")
 }
 
-record(ai, "$(P)$(DEV):testRead") {
-   field (DESC, "test read")
-   field (DTYP, "stream")
-   field (INP, "@daq6510.proto read(102) $(PORT)")
-#   field (SIZV, "100")
-#   field (PINI, "YES")
+record(lsi, "$(P)$(DEV):SystErr") {
+   field (DESC, "DAQ6510 system error")
+   field (SIZV, "100")
 }
+
+record(calcout, "$(P)$(DEV):OnOff") {
+   field (DESC, "On Off Button")
+   field (CALC, "A")
+   field (FLNK, "$(P)$(DEV):Reset")
+   field (OUT, "$(P)$(DEV):ScanActive")
+   field (OOPT, "4")
+}
+
+record(calc, "$(P)$(DEV):ScanActive") {
+   field (DESC, "Scan active: 1")
+   field (INPA, "$(P)$(DEV):OnOff")
+   field (CALC, "A==1?1:0")
+   field (FLNK, "$(P)$(DEV):StartScan")
+}
+
+record(bo, "$(P)$(DEV):StartScan") {
+   field (DESC, "idle : 0, measuring : 1")
+   field (ONAM, "RST")
+   field (ZNAM, "SAV1")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto start_scan $(PORT)")
+   field (FLNK, "$(P)$(DEV):FanoutRead")
+   field (SCAN, "5 second")
+   field (SDIS, "$(P)$(DEV):ScanActive")
+   field (DISV, "0")
+}
+
+#record(calc, "$(P)$(DEV):TestPer") {
+#   field (DESC, "Scan active: 1")
+#   field (FLNK, "$(P)$(DEV):TestPer")
+#   field (CALC, "VAL==0?1:0")
+#   field (SCAN, "1 second")
+#   field (SDIS, "$(P)$(DEV):ScanActive")
+#   field (DISV, "0")
+#}
 
 record(bo, "$(P)$(DEV):Reset") {
    field (DESC, "Reset device")
    field (DTYP, "stream")
    field (OUT, "@daq6510.proto reset $(PORT)")
    field (FLNK, "$(P)$(DEV):FanoutSetup")
+   field (SDIS, "$(P)$(DEV):OnOff")
+   field (DISV, "0")
 }
 
 record(ai, "$(P)$(DEV):lastIndex") {
@@ -36,15 +71,6 @@ record(bo, "$(P)$(DEV):Chan$(CHAN):SetupScan") {
    field (OUT, "@daq6510.proto set_up_scan(10$(CHAN)) $(PORT)")
 }
 
-record(bo, "$(P)$(DEV):StartScan") {
-   field (DESC, "idle : 0, measuring : 1")
-   field (ONAM, "RST")
-   field (ZNAM, "SAV1")
-   field (DTYP, "stream")
-   field (OUT, "@daq6510.proto start_scan $(PORT)")
-   field (FLNK, "$(P)$(DEV):FanoutRead")
-}
-
 record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
    field (DESC, "read temp")
    field (DTYP, "stream")
@@ -57,7 +83,7 @@ record(fanout, "$(P)$(DEV):FanoutSetup") {
    field (LNK1, "$(P)$(DEV):Chan2:SetupScan")
    field (LNK2, "$(P)$(DEV):Chan3:SetupScan")
    field (LNK3, "$(P)$(DEV):Chan4:SetupScan")
-   field (FLNK, "$(P)$(DEV):StartScan")
+   field (FLNK, "$(P)$(DEV):ScanActive")
    field (SELM, "Mask")
    field (SHFT, "0")
    field (SELL, "$(P)$(DEV):ChanActive")
@@ -74,11 +100,20 @@ record(fanout, "$(P)$(DEV):FanoutRead") {
    field (SELL, "$(P)$(DEV):ChanActive")
 }
 
-
-#record(ai, "testRead") {
-#   field (DESC, "read temp")
+#record(ai, "$(P)$(DEV):testRead") {
+#   field (DESC, "test read")
 #   field (DTYP, "stream")
-#   field (INP, "@daq6510.proto read(103) $(PORT)")
+#   field (INP, "@daq6510.proto read(102) $(PORT)")
+#   field (SIZV, "100")
+#   field (PINI, "YES")
 #}
 
+record(ai, "$(P)$(DEV):testDisv2"){
+   field (SDIS, "testDisv1")
+   field (DISV, "0")
+}
+
+record(bi, "$(P)$(DEV):testDisv1"){
+   field (DESC, "test")
+}
 
