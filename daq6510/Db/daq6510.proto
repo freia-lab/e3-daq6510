@@ -36,6 +36,15 @@ reset {
    @mismatch {in "%(" $P $DEV ":SystErr)#s";}  
 }
 
+recall {
+   out "*RCL \$1";
+   
+   out "syst:err?";
+   in "0,\"No error;0;0 0\"";
+   @mismatch {in "%(" $P $DEV ":SystErr)#s";}  
+}
+
+
 # Sets the scanning type of a channel and adds the channel to the scan
 
 set_up_scan {
@@ -51,10 +60,15 @@ set_up_scan {
 
 #Starts the scan (NB only one reading), saves the setting in sav1 and retrieves the size of the current data buffer
 
-start_scan {
+finish_setup {
    out ":ROUTe:SCAN:COUNt:SCAN 1";
-   out ":ROUTe:SCAN:RESTart ON";
+   out ":ROUTe:SCAN:RESTart ON"; #If power is lost during the scan, when power is restored, the scan restarts.
    out "*SAV 1";
+   out ":syst:pos SAV1"; #If power is lost in between scans, the settings will be called when power is restored.
+   out "*WAI";
+}
+
+start_scan {
    out ":INIT";
    out "*WAI";
 

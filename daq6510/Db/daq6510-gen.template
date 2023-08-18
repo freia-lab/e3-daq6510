@@ -6,6 +6,12 @@ record(lsi, "$(P)$(DEV):Id") {
    field (PINI, "YES")
 }
 
+record(bo, "$(P)$(DEV):Recall") {
+   field (DESC, "Recall setting")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto recall(1) $(PORT)")
+}
+
 record(lsi, "$(P)$(DEV):SystErr") {
    field (DESC, "DAQ6510 system error")
    field (SIZV, "100")
@@ -22,7 +28,7 @@ record(calcout, "$(P)$(DEV):OnOff") {
 record(calc, "$(P)$(DEV):ScanActive") {
    field (DESC, "Scan active: 1")
    field (INPA, "$(P)$(DEV):OnOff")
-   field (CALC, "A==1?1:0")
+   field (CALC, "A")
    field (FLNK, "$(P)$(DEV):StartScan")
 }
 
@@ -32,8 +38,8 @@ record(bo, "$(P)$(DEV):StartScan") {
    field (ZNAM, "SAV1")
    field (DTYP, "stream")
    field (OUT, "@daq6510.proto start_scan $(PORT)")
-   field (FLNK, "$(P)$(DEV):FanoutRead")
-   field (SCAN, "5 second")
+   field (FLNK, "$(P)$(DEV):FanoutRead1")
+   field (SCAN, "2 second")
    field (SDIS, "$(P)$(DEV):ScanActive")
    field (DISV, "0")
 }
@@ -51,7 +57,7 @@ record(bo, "$(P)$(DEV):Reset") {
    field (DESC, "Reset device")
    field (DTYP, "stream")
    field (OUT, "@daq6510.proto reset $(PORT)")
-   field (FLNK, "$(P)$(DEV):FanoutSetup")
+   field (FLNK, "$(P)$(DEV):FanoutSetup1")
    field (SDIS, "$(P)$(DEV):OnOff")
    field (DISV, "0")
 }
@@ -60,45 +66,108 @@ record(ai, "$(P)$(DEV):lastIndex") {
    field (DESC, "buffer last index")
 }
 
-record(mbboDirect, "$(P)$(DEV):ChanActive") {
-   field (DESC, "Activated channels")
+record(mbboDirect, "$(P)$(DEV):ChanActive1") {
+   field (DESC, "Activated channels 1-10")
+   field (PINI, "YES")
+}
+
+record(mbboDirect, "$(P)$(DEV):ChanActive2") {
+   field (DESC, "Activated channels 11-20")
    field (PINI, "YES")
 }
 
 record(bo, "$(P)$(DEV):Chan$(CHAN):SetupScan") {
-   field (DESC, "Activate channel 10$(CHAN)")
+   field (DESC, "Activate channel 1$(CHAN)")
    field (DTYP, "stream")
-   field (OUT, "@daq6510.proto set_up_scan(10$(CHAN)) $(PORT)")
+   field (OUT, "@daq6510.proto set_up_scan(1$(CHAN)) $(PORT)")
 }
 
 record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
    field (DESC, "read temp")
    field (DTYP, "stream")
-   field (INP, "@daq6510.proto read(10$(CHAN)) $(PORT)")
+   field (INP, "@daq6510.proto read(1$(CHAN)) $(PORT)")
+   field (EGU, "°C")
 }
 
-record(fanout, "$(P)$(DEV):FanoutSetup") {
-   field (DESC, "Link to read records")
-   field (LNK0, "$(P)$(DEV):Chan1:SetupScan")
-   field (LNK1, "$(P)$(DEV):Chan2:SetupScan")
-   field (LNK2, "$(P)$(DEV):Chan3:SetupScan")
-   field (LNK3, "$(P)$(DEV):Chan4:SetupScan")
+record(bo, "$(P)$(DEV):FinishSetup") {
+   field (DESC, "Finish setup and save")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto finish_setup $(PORT)")
    field (FLNK, "$(P)$(DEV):ScanActive")
-   field (SELM, "Mask")
-   field (SHFT, "0")
-   field (SELL, "$(P)$(DEV):ChanActive")
 }
 
-record(fanout, "$(P)$(DEV):FanoutRead") {
-   field (DESC, "Link to read records")
-   field (LNK0, "$(P)$(DEV):Chan1:RdTemp")
-   field (LNK1, "$(P)$(DEV):Chan2:RdTemp")
-   field (LNK2, "$(P)$(DEV):Chan3:RdTemp")
-   field (LNK3, "$(P)$(DEV):Chan4:RdTemp")
+record(fanout, "$(P)$(DEV):FanoutSetup1") {
+   field (DESC, "Link to setup")
+   field (LNK0, "$(P)$(DEV):Chan01:SetupScan")
+   field (LNK1, "$(P)$(DEV):Chan02:SetupScan")
+   field (LNK2, "$(P)$(DEV):Chan03:SetupScan")
+   field (LNK3, "$(P)$(DEV):Chan04:SetupScan")
+   field (LNK4, "$(P)$(DEV):Chan05:SetupScan")
+   field (LNK5, "$(P)$(DEV):Chan06:SetupScan")
+   field (LNK6, "$(P)$(DEV):Chan07:SetupScan")
+   field (LNK7, "$(P)$(DEV):Chan08:SetupScan")
+   field (LNK8, "$(P)$(DEV):Chan09:SetupScan")
+   field (LNK9, "$(P)$(DEV):Chan10:SetupScan")
+   field (FLNK, "$(P)$(DEV):FanoutSetup2")
    field (SELM, "Mask")
    field (SHFT, "0")
-   field (SELL, "$(P)$(DEV):ChanActive")
+   field (SELL, "$(P)$(DEV):ChanActive1")
 }
+
+record(fanout, "$(P)$(DEV):FanoutSetup2") {
+   field (DESC, "Link to setup")
+   field (LNK0, "$(P)$(DEV):Chan11:SetupScan")
+   field (LNK1, "$(P)$(DEV):Chan12:SetupScan")
+   field (LNK2, "$(P)$(DEV):Chan13:SetupScan")
+   field (LNK3, "$(P)$(DEV):Chan14:SetupScan")
+   field (LNK4, "$(P)$(DEV):Chan15:SetupScan")
+   field (LNK5, "$(P)$(DEV):Chan16:SetupScan")
+   field (LNK6, "$(P)$(DEV):Chan17:SetupScan")
+   field (LNK7, "$(P)$(DEV):Chan18:SetupScan")
+   field (LNK8, "$(P)$(DEV):Chan19:SetupScan")
+   field (LNK9, "$(P)$(DEV):Chan20:SetupScan")
+#   field (FLNK, "$(P)$(DEV):ScanActive")
+   field (FLNK, "$(P)$(DEV):FinishSetup")
+   field (SELM, "Mask")
+   field (SHFT, "0")
+   field (SELL, "$(P)$(DEV):ChanActive2")
+}
+
+record(fanout, "$(P)$(DEV):FanoutRead1") {
+   field (DESC, "Link to setup")
+   field (LNK0, "$(P)$(DEV):Chan01:RdTemp")
+   field (LNK1, "$(P)$(DEV):Chan02:RdTemp")
+   field (LNK2, "$(P)$(DEV):Chan03:RdTemp")
+   field (LNK3, "$(P)$(DEV):Chan04:RdTemp")
+   field (LNK4, "$(P)$(DEV):Chan05:RdTemp")
+   field (LNK5, "$(P)$(DEV):Chan06:RdTemp")
+   field (LNK6, "$(P)$(DEV):Chan07:RdTemp")
+   field (LNK7, "$(P)$(DEV):Chan08:RdTemp")
+   field (LNK8, "$(P)$(DEV):Chan09:RdTemp")
+   field (LNK9, "$(P)$(DEV):Chan10:RdTemp")
+   field (FLNK, "$(P)$(DEV):FanoutRead2")
+   field (SELM, "Mask")
+   field (SHFT, "0")
+   field (SELL, "$(P)$(DEV):ChanActive1")
+}
+
+record(fanout, "$(P)$(DEV):FanoutRead2") {
+   field (DESC, "Link to setup")
+   field (LNK0, "$(P)$(DEV):Chan11:RdTemp")
+   field (LNK1, "$(P)$(DEV):Chan12:RdTemp")
+   field (LNK2, "$(P)$(DEV):Chan13:RdTemp")
+   field (LNK3, "$(P)$(DEV):Chan14:RdTemp")
+   field (LNK4, "$(P)$(DEV):Chan15:RdTemp")
+   field (LNK5, "$(P)$(DEV):Chan16:RdTemp")
+   field (LNK6, "$(P)$(DEV):Chan17:RdTemp")
+   field (LNK7, "$(P)$(DEV):Chan18:RdTemp")
+   field (LNK8, "$(P)$(DEV):Chan19:RdTemp")
+   field (LNK9, "$(P)$(DEV):Chan20:RdTemp")
+   field (SELM, "Mask")
+   field (SHFT, "0")
+   field (SELL, "$(P)$(DEV):ChanActive2")
+}
+
 
 #record(ai, "$(P)$(DEV):testRead") {
 #   field (DESC, "test read")
@@ -108,12 +177,4 @@ record(fanout, "$(P)$(DEV):FanoutRead") {
 #   field (PINI, "YES")
 #}
 
-record(ai, "$(P)$(DEV):testDisv2"){
-   field (SDIS, "testDisv1")
-   field (DISV, "0")
-}
-
-record(bi, "$(P)$(DEV):testDisv1"){
-   field (DESC, "test")
-}
 
