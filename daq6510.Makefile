@@ -21,6 +21,8 @@ include $(E3_REQUIRE_TOOLS)/driver.makefile
 # Most modules only need to be built for x86_64
 EXCLUDE_ARCHS += linux-ppc64e6500
 EXCLUDE_ARCHS += linux-corei7-poky
+#EXCLUDE_ARCHS += linux-x86_64-debug
+
 
 # Since this file (daq6510.Makefile) is copied into
 # the module directory at build-time, these paths have to be relative

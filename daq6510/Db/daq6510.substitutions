@@ -1,4 +1,9 @@
 file "daq6510-gen.template" { pattern
+{}
+{}
+}
+
+file "daq6510-chan.template" { pattern
 {CHAN}
 {01}
 {02}

@@ -23,6 +23,8 @@ record(calcout, "$(P)$(DEV):OnOff") {
    field (FLNK, "$(P)$(DEV):Reset")
    field (OUT, "$(P)$(DEV):ScanActive")
    field (OOPT, "4")
+   field (PINI, "YES")
+   info (autosaveFields, "A")
 }
 
 record(calc, "$(P)$(DEV):ScanActive") {
@@ -43,6 +45,7 @@ record(bo, "$(P)$(DEV):StartScan") {
    field (SCAN, "2 second")
    field (SDIS, "$(P)$(DEV):ScanActive")
    field (DISV, "0")
+   info (autosaveFields, "SCAN")
 }
 
 #record(calc, "$(P)$(DEV):TestPer") {
@@ -70,24 +73,13 @@ record(ai, "$(P)$(DEV):lastIndex") {
 record(mbboDirect, "$(P)$(DEV):ChanActive1") {
    field (DESC, "Activated channels 1-10")
    field (PINI, "YES")
+   info (autosaveFields, "VAL")
 }
 
 record(mbboDirect, "$(P)$(DEV):ChanActive2") {
    field (DESC, "Activated channels 11-20")
    field (PINI, "YES")
-}
-
-record(bo, "$(P)$(DEV):Chan$(CHAN):SetupScan") {
-   field (DESC, "Activate channel 1$(CHAN)")
-   field (DTYP, "stream")
-   field (OUT, "@daq6510.proto set_up_scan(1$(CHAN)) $(PORT)")
-}
-
-record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
-   field (DESC, "read temp")
-   field (DTYP, "stream")
-   field (INP, "@daq6510.proto read(1$(CHAN)) $(PORT)")
-   field (EGU, "°C")
+   info (autosaveFields, "VAL")
 }
 
 record(bo, "$(P)$(DEV):FinishSetup") {

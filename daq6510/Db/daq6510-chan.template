@@ -1,0 +1,13 @@
+record(bo, "$(P)$(DEV):Chan$(CHAN):SetupScan") {
+   field (DESC, "Activate channel 1$(CHAN)")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto set_up_scan(1$(CHAN)) $(PORT)")
+}
+
+record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
+   field (DESC, "read temp")
+   field (DTYP, "stream")
+   field (INP, "@daq6510.proto read(1$(CHAN)) $(PORT)")
+   field (EGU, "°C")
+}
+
