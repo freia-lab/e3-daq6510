@@ -34,8 +34,9 @@ record(calc, "$(P)$(DEV):ScanActive") {
 
 record(bo, "$(P)$(DEV):StartScan") {
    field (DESC, "idle : 0, measuring : 1")
-   field (ONAM, "RST")
-   field (ZNAM, "SAV1")
+#   field (ONAM, "RST")
+#   field (ZNAM, "SAV1")
+   field (UDFS, "NO_ALARM")
    field (DTYP, "stream")
    field (OUT, "@daq6510.proto start_scan $(PORT)")
    field (FLNK, "$(P)$(DEV):FanoutRead1")
@@ -166,8 +167,17 @@ record(fanout, "$(P)$(DEV):FanoutRead2") {
    field (SELM, "Mask")
    field (SHFT, "0")
    field (SELL, "$(P)$(DEV):ChanActive2")
+   field (FLNK, "$(P)$(DEV):setScanRdLED")
 }
 
+record(bo, "$(P)$(DEV):setScanRdLED") {
+   field (VAL, "1")
+   field (OUT, "$(P)$(DEV):sScanRdLED PP")
+}
+record(bo, "$(P)$(DEV):sScanRdLED") {
+   field (ONAM, "Scanning")
+   field (HIGH, "0.5")
+}
 
 #record(ai, "$(P)$(DEV):testRead") {
 #   field (DESC, "test read")

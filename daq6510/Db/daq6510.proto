@@ -86,7 +86,7 @@ start_scan {
 #retrieves the last buffer reading in the form <Channel>,<Reading>,...
 
 read {
-   out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ";
+   out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ,STAT,SEC";
    in "%#/(^\$1,)|(.*\$1,)/\$1,/\$1,%f%*#s";
    @replytimeout {get_err;}
 }
