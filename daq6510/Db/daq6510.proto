@@ -91,3 +91,10 @@ read {
    @replytimeout {get_err;}
 }
 
+# Get the number of times the relays has been closed
+
+get_close_count {
+   out ":rout:clos:coun? (@101:140)";
+   separator=","; 
+   in "%i"; 
+}

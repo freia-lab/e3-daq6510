@@ -179,4 +179,15 @@ record(bo, "$(P)$(DEV):sScanRdLED") {
 #   field (PINI, "YES")
 #}
 
-
+record(waveform, "$(P)$(DEV):sCloseCnt") {
+   field(DESC, "Relay's operation count")
+   field(NELM, "40")
+   field(FTVL, "UINT64")
+   field(DTYP, "stream")
+   field(INP, "@daq6510.proto get_close_count $(PORT)")
+}
+record(waveform, "$(P)$(DEV):Xaxis") {
+   field(NELM, "40")
+   field(FTVL, "USHORT")
+   info (autosaveFields, "VAL")
+}
