@@ -9,5 +9,20 @@ record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
    field (DTYP, "stream")
    field (INP, "@daq6510.proto read(1$(CHAN)) $(PORT)")
    field (EGU, "°C")
+   field (FLNK, "$(P)$(DEV):Chan$(CHAN):RdSEC")
 }
 
+record(longin, "$(P)$(DEV):Chan$(CHAN):RdSEC") {   field (DESC, "read temp")
+   field (DESC, "Unix time-stamp")
+   field (DTYP, "stream")
+   field (INP, "@daq6510.proto readSEC(1$(CHAN)) $(PORT)")
+   field (EGU, "s")
+   field (FLNK, "$(P)$(DEV):Chan$(CHAN):RdSTAT")
+}
+
+record(mbbiDirect, "$(P)$(DEV):Chan$(CHAN):RdSTAT") { 
+   field (DESC, "Scan read status")
+   field (DESC, "Unix time-stamp")
+   field (DTYP, "stream")
+   field (INP, "@daq6510.proto readSTAT(1$(CHAN)) $(PORT)")
+}
