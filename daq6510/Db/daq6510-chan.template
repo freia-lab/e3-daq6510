@@ -12,7 +12,8 @@ record(ai, "$(P)$(DEV):Chan$(CHAN):RdTemp") {
    field (FLNK, "$(P)$(DEV):Chan$(CHAN):RdSEC")
 }
 
-record(longin, "$(P)$(DEV):Chan$(CHAN):RdSEC") {   field (DESC, "read temp")
+record(longin, "$(P)$(DEV):Chan$(CHAN):RdSEC") {   
+   field (DESC, "read temp")
    field (DESC, "Unix time-stamp")
    field (DTYP, "stream")
    field (INP, "@daq6510.proto readSEC(1$(CHAN)) $(PORT)")
@@ -22,7 +23,25 @@ record(longin, "$(P)$(DEV):Chan$(CHAN):RdSEC") {   field (DESC, "read temp")
 
 record(mbbiDirect, "$(P)$(DEV):Chan$(CHAN):RdSTAT") { 
    field (DESC, "Scan read status")
-   field (DESC, "Unix time-stamp")
    field (DTYP, "stream")
    field (INP, "@daq6510.proto readSTAT(1$(CHAN)) $(PORT)")
+   field (FLNK, "$(P)$(DEV):Chan$(CHAN):RdSEC-aSub")
+}
+
+record(aSub, "$(P)$(DEV):Chan$(CHAN):RdSEC-aSub")
+{
+  field(DESC, "Unix time stamp decoding")
+  field(INPA, "$(P)$(DEV):Chan$(CHAN):RdSEC MSI")
+  field(FTA, "ULONG")
+  field(FTVA, "STRING")
+  field(INPB, "$(P)$(DEV):TimeStampFmt")
+  field(FTB, "STRING")
+  field(OUTA, "$(P)$(DEV):Chan$(CHAN):Rd-TimeStamp MS")
+  field(FLNK, "$(P)$(DEV):Chan$(CHAN):Rd-TimeStamp PP")
+  field(SNAM, "time2StrProcess")
+}
+
+record(stringin, "$(P)$(DEV):Chan$(CHAN):Rd-TimeStamp")
+{
+  field(DESC, "Time stamp string")
 }

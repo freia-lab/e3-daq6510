@@ -191,3 +191,9 @@ record(waveform, "$(P)$(DEV):Xaxis") {
    field(FTVL, "USHORT")
    info (autosaveFields, "VAL")
 }
+
+record(stringout, "$(P)$(DEV):TimeStampFmt") {
+   field(DESC, "Format as in strftime")
+   info (autosaveFields, "VAL")
+   field(VAL, "%F %T")
+}

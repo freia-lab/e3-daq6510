@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-28 17:50:27 by konrad-->
+<!--Saved on 2023-08-30 14:05:03 by konrad-->
 <display version="2.0.0">
   <name>1.chan</name>
-  <width>350</width>
+  <width>420</width>
   <height>30</height>
   <widget type="label" version="2.0.0">
     <name>Label_3</name>
     <text>Channel $(N)</text>
     <y>4</y>
-    <width>90</width>
+    <width>87</width>
     <height>21</height>
     <auto_size>true</auto_size>
   </widget>
@@ -23,20 +23,37 @@
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_3</name>
-    <pv_name>pva://$(P)$(DEV):Chan$(N):RdSEC</pv_name>
+    <pv_name>pva://$(P)$(DEV):Chan$(N):Rd-TimeStamp</pv_name>
     <x>170</x>
     <y>4</y>
-    <width>90</width>
+    <width>150</width>
     <height>21</height>
+    <horizontal_alignment>2</horizontal_alignment>
+    <wrap_words>false</wrap_words>
   </widget>
   <widget type="textupdate" version="2.0.0">
     <name>Text Update_5</name>
     <pv_name>pva://$(P)$(DEV):Chan$(N):RdSTAT</pv_name>
-    <x>270</x>
+    <x>365</x>
     <y>4</y>
     <width>50</width>
     <height>21</height>
     <format>4</format>
     <precision>2</precision>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED</name>
+    <pv_name>pva://$(P)$(DEV):Chan$(N):RdSTAT.B0</pv_name>
+    <x>330</x>
+    <y>5</y>
+    <off_color>
+      <color name="OK" red="61" green="216" blue="61">
+      </color>
+    </off_color>
+    <on_label>?</on_label>
+    <on_color>
+      <color name="WARNING" red="252" green="242" blue="17">
+      </color>
+    </on_color>
   </widget>
 </display>

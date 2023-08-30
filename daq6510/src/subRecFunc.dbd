@@ -1,0 +1,3 @@
+variable(time2StrDebug) 
+function(time2StrInit) 
+function(time2StrProcess) 

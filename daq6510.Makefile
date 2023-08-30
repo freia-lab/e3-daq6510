@@ -42,6 +42,8 @@ TEMPLATES += $(wildcard $(APPDB)/*.db)
 TEMPLATES += $(wildcard $(APPDB)/*.proto)
 #TEMPLATES += $(wildcard $(APPDB)/*.template)
 
+DBDS += $(wildcard $(APPSRC)/*.dbd)
+
 SCRIPTS += $(wildcard ../iocsh/*.iocsh)
 
 # Note that architecture-specific source files can be specified:
@@ -53,6 +55,8 @@ SCRIPTS += $(wildcard ../iocsh/*.iocsh)
 #     CFLAGS CXXFLAGS CPPFLAGS
 # i.e.
 #     USR_CFLAGS_linux-ppc64e6500 += ...
+
+SOURCES += $(APPSRC)/subRecFunc.c
 
 # Same as with any source or header files, you can also use $SUBS and $TMPS to define
 # database files to be inflated (using MSI), e.g.
