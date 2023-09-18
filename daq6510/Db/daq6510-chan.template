@@ -44,4 +44,14 @@ record(aSub, "$(P)$(DEV):Chan$(CHAN):RdSEC-aSub")
 record(stringin, "$(P)$(DEV):Chan$(CHAN):Rd-TimeStamp")
 {
   field(DESC, "Time stamp string")
+  field(FLNK, "$(P)$(DEV):Chan$(CHAN):PID-Trig")
 }
+
+record(calcout, "$(P)$(DEV):Chan$(CHAN):PID-Trig") {
+  field(DESC, "Trigger for the pid record")
+  field(ODLY, "1.0")
+  field(OUT, "$(PID-PROC)")
+  field(CALC, "1")
+  info (autosaveFields, "ODLY")
+}
+
