@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2023-08-30 14:02:46 by konrad-->
+<!--Saved on 2023-09-19 20:41:09 by konrad-->
 <display version="2.0.0">
   <name>DAQ6510</name>
   <macros>
@@ -44,7 +44,7 @@
     <pv_name>$(P)$(DEV):Id.$</pv_name>
     <x>134</x>
     <y>819</y>
-    <width>586</width>
+    <width>500</width>
     <format>6</format>
   </widget>
   <widget type="action_button" version="3.0.0">
@@ -86,7 +86,7 @@
     <pv_name>$(P)$(DEV):SystErr.$</pv_name>
     <x>134</x>
     <y>789</y>
-    <width>586</width>
+    <width>500</width>
     <format>6</format>
     <precision>4</precision>
   </widget>
@@ -496,9 +496,9 @@
       </action>
     </actions>
     <pv_name>$(P)$(DEV):SystErr.$</pv_name>
-    <x>750</x>
+    <x>770</x>
     <y>781</y>
-    <width>160</width>
+    <width>140</width>
     <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="led" version="2.0.0">
@@ -885,5 +885,20 @@ $(pv_value)</tooltip>
       </font>
     </font>
     <auto_size>true</auto_size>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button_3</name>
+    <actions>
+      <action type="write_pv">
+        <pv_name>$(pv_name)</pv_name>
+        <value>1</value>
+        <description>Read error msg</description>
+      </action>
+    </actions>
+    <pv_name>$(P)$(DEV):SystErrFlnk</pv_name>
+    <x>650</x>
+    <y>781</y>
+    <width>120</width>
+    <tooltip>$(actions)</tooltip>
   </widget>
 </display>

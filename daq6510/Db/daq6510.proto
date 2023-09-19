@@ -5,11 +5,6 @@ Terminator = LF;
 
 ReplyTimeout = 5000;
 
-
-
-P = "CstatV-AC:";
-DEV = "DAQ6510";
-
 get_id {
    out "*idn?";
    in "%#s";
@@ -19,7 +14,7 @@ get_id {
 
 get_err {
    out "syst:err?";
-   in "%(" $P $DEV ":SystErr)#s";
+   in "%(\$1:SystErr)#s";
 }
 
 setting_poweron {
@@ -33,7 +28,7 @@ reset {
    
    out "syst:err?";
    in "0,\"No error;0;0 0\"";
-   @mismatch {in "%(" $P $DEV ":SystErr)#s";}  
+   @mismatch {in "%(\$1:SystErr)#s";}  
 }
 
 recall {
@@ -41,7 +36,7 @@ recall {
    
    out "syst:err?";
    in "0,\"No error;0;0 0\"";
-   @mismatch {in "%(" $P $DEV ":SystErr)#s";}  
+   @mismatch {in "%(\$2:SystErr)#s";}  
 }
 
 
@@ -55,7 +50,7 @@ set_up_scan {
   
    out "syst:err?";
    in "0,\"No error;0;0 0\"";
-   @mismatch {in "%(" $P $DEV ":SystErr)#s";} 
+   @mismatch {in "%(\$2:SystErr)#s";} 
 }
 
 #Starts the scan (NB only one reading), saves the setting in sav1 and retrieves the size of the current data buffer
@@ -74,31 +69,31 @@ start_scan {
 
    out "syst:err?";
    in "0,\"No error;0;0 0\"";
-   @mismatch {in "%(" $P $DEV ":SystErr)#s";} 
+   @mismatch {in "%(\$1:SystErr)#s";} 
 
    out ":trac:act:end?";
-   in "%(" $P $DEV ":lastIndex)i";
+   in "%(\$1:lastIndex)i";
 
    #out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ";
-   #in "%(" $P $DEV ":testRead)s"
+   #in "%(\$1:testRead)s"
 }
 
 #retrieves the last buffer reading in the form <Channel>,<Reading>,...
 
 read {
-   out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,READ";
+   out ":trac:data? 1, %(\$2:lastIndex)i, \"defbuffer1\", CHAN,READ";
    in "%#/(^\$1,)|(.*\$1,)/\$1,/\$1,%f%*#s";
-   @replytimeout {get_err;}
+#   @replytimeout {get_err;}
 }
 readSEC {
-   out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,SEC";
+   out ":trac:data? 1, %(\$2:lastIndex)i, \"defbuffer1\", CHAN,SEC";
    in "%#/(^\$1,)|(.*\$1,)/\$1,/\$1,%i%*#s";
-   @replytimeout {get_err;}
+#   @replytimeout {get_err;}
 }
 readSTAT {
-   out ":trac:data? 1, %(" $P $DEV ":lastIndex)i, \"defbuffer1\", CHAN,STAT";
+   out ":trac:data? 1, %(\$2:lastIndex)i, \"defbuffer1\", CHAN,STAT";
    in "%#/(^\$1,)|(.*\$1,)/\$1,/\$1,%i%*#s";
-   @replytimeout {get_err;}
+#   @replytimeout {get_err;}
 }
 
 # Get the number of times the relays has been closed

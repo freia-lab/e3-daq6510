@@ -1,0 +1,27 @@
+# This should be the included snippet to configure and run the module in an IOC.
+# When using this script (as opposed to daq6510.iocsh one has to load the records
+# database. Two templates are to be used: daq6510-gen.template and daq6510-chan.template.
+# The following symbols must be defined:
+# daq6510-gen.template; P, DEV, PORT
+# daq6510-chan.template; P, DEV, PORT, CHAN, PID-PROC
+
+# daq6510_init.iocsh should be loaded with
+#
+#   iocshLoad("$(daq6510_DIR)daq6510_init.iocsh", "IP=xxx.yyy.zzz.nnn,IP_PORT=iiii")
+
+#- ###                daq6510 module                ###
+#- ####################################################
+#- >> Mandatory
+#- IP         - Instrument's IP address
+#- P	      - PV name prefix, pvname: $(P)$(DEV)...
+
+
+#  >> Optional
+#  IP_PORT    - IP port number (default 5025)
+#  ASYN_PORT  - asyn port name (default PORT1)
+#  DEV        - device name (part of the PV name (default DAQ6510)
+
+drvAsynIPPortConfigure("$(ASYN_PORT=PORT1)","$(IP):$(IP_PORT=5025)",0,0,0)
+
+#Indicate the folder where the protocol file is installed
+epicsEnvSet("STREAM_PROTOCOL_PATH","${STREAM_PROTOCOL_PATH}:$(daq6510_DB)")

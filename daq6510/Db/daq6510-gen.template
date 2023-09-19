@@ -9,13 +9,22 @@ record(lsi, "$(P)$(DEV):Id") {
 record(bo, "$(P)$(DEV):Recall") {
    field (DESC, "Recall setting")
    field (DTYP, "stream")
-   field (OUT, "@daq6510.proto recall(1) $(PORT)")
+   field (OUT, "@daq6510.proto recall(1,$(P)$(DEV)) $(PORT)")
 }
 
 record(lsi, "$(P)$(DEV):SystErr") {
    field (DESC, "DAQ6510 system error")
    field (SIZV, "100")
 }
+
+record(bo, "$(P)$(DEV):SystErrFlnk") {
+   field (DESC, "DAQ system error")
+   field (UDFS, "NO_ALARM")
+   field (DTYP, "stream")
+   field (OUT, "@daq6510.proto get_err($(P)$(DEV)) $(PORT)")
+   field (PINI, "YES")
+}
+
 
 record(calcout, "$(P)$(DEV):OnOff") {
    field (DESC, "On Off Button")
@@ -40,7 +49,7 @@ record(bo, "$(P)$(DEV):StartScan") {
 #   field (ZNAM, "SAV1")
    field (UDFS, "NO_ALARM")
    field (DTYP, "stream")
-   field (OUT, "@daq6510.proto start_scan $(PORT)")
+   field (OUT, "@daq6510.proto start_scan($(P)$(DEV)) $(PORT)")
    field (FLNK, "$(P)$(DEV):FanoutRead1")
    field (SCAN, "2 second")
    field (SDIS, "$(P)$(DEV):ScanActive")
@@ -60,7 +69,7 @@ record(bo, "$(P)$(DEV):StartScan") {
 record(bo, "$(P)$(DEV):Reset") {
    field (DESC, "Reset device")
    field (DTYP, "stream")
-   field (OUT, "@daq6510.proto reset $(PORT)")
+   field (OUT, "@daq6510.proto reset($(P)$(DEV)) $(PORT)")
    field (FLNK, "$(P)$(DEV):FanoutSetup1")
    field (SDIS, "$(P)$(DEV):OnOff")
    field (DISV, "0")
