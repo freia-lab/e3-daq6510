@@ -23,5 +23,4 @@
 
 drvAsynIPPortConfigure("$(ASYN_PORT=PORT1)","$(IP):$(IP_PORT=5025)",0,0,0)
 
-#Indicate the folder where the protocol file is installed
-epicsEnvSet("STREAM_PROTOCOL_PATH","${STREAM_PROTOCOL_PATH}:$(daq6510_DB)")
+# STREAM_PROTOCOL_PATH env var is set automatically by require module
